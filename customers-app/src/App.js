@@ -28,5 +28,23 @@ class App extends Component {
     );
   }
 }
+//exact, por ej cuando la url no matchee exactamenete con lo q nosotros le pasamos en path, no se va a ejecutar el metodo de renderizado del metodo asociacdo
+// strict = true, evalua si existe una / final o no
+// match, para cuando se usa wildcard
+// para acceder al parametro :dni de la url /customers/:dni, debemos usar match.params.dni
+//Componente SWITCH es especialemente util con rutas q pueden generar matches ambiguos o evaluaciones ambiguas..
+//El primer path que haga match se hace el render.. por ende se recomiendo espeficicar las rutas mas especificar arriba y las mas generales abajo
+
+//Componente de navegacion:
+//LINK: permiten navegacion. pero NavLink permite customizarse y visualizarse de otra manera
+//Redirect: para hacer redirecciones, para validar cuando un usuario no esta permitido para acceder
+
+//WitchROuter, es un HOC, high Order Componente, rerenderiza el componente cuando las propiedades recibe un nuevo valor..
+//history, es mutable, es decir no va a tener un valor estatico, sino q puede ser alterado por funciones como:
+//push: agrega nueva entrada en History
+//replace: modifica el ultimo elemento ungresao dne history por otro nuevo.
+//go(n), goBack(), goForward(): sentencias d manejo de navegacion.. para ir adelante o hacia atras en la pila de history. go(n) donde n se le indica el numero de links hacia adelante o hacia atras para moverse
+//block(), para q el user no pueda desplazarse libremente por las urls
+
 
 export default App;
