@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AppFrame from '../components/AppFrame';
 import CustomersActions from '../components/CustomersActions';
@@ -28,10 +27,6 @@ class HomeContainer extends Component {
         );
     }
 }
-
-HomeContainer.propTypes = {
-    
-};
 
 //withRouter es un decorator, agrega funcionalidad al componente, agregando las propiedades de props (history, etc..) 
 //q no le da la funcion al llamar al componente. Consejo, poner siempre withRouter para que siempre el componente cuente con 
