@@ -62,10 +62,16 @@ CustomersContainer.propTypes = {
     fetchCustomers: PropTypes.func.isRequired,
 };
 
+/*
 const mapDispatchToProps = dispatch => (
     {
         fetchCustomers: () => dispatch(fetchCustomers())
     }
 );
+*/
+//o lo puedo reemplazar por fetchCustomers directamente, ya que dentro ya creo toda la accion usando redux-action:
+//const mapDispatchToProps = { fetchCustomers };
 
-export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
+//o mejor aun, mandar el fetchCustomers, directo como 2do parametro de la funcion conect:
+//export default withRouter(connect(null, mapDispatchToProps)(CustomersContainer));
+export default withRouter(connect(null, { fetchCustomers })(CustomersContainer));
