@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import CustomersList from './../components/CustomersList';
 import CustomersActions from '../components/CustomersActions';
 import {fetchCustomers} from './../actions/fetchCustomers';
+import { getCustomers } from './../selectors/customers';
 
 class CustomersContainer extends Component {
 
@@ -60,7 +61,7 @@ const mapDispatchToProps = dispatch => (
 //const mapDispatchToProps = { fetchCustomers };
 
 const mapStateToProps = state => ({
-    customers: state.customers
+    customers: getCustomers(state)  //getCustomers funcion que retorna los customers del state, en principio es un selector
 });
 
 //o mejor aun, mandar el fetchCustomers, directo como 2do parametro de la funcion conect:
