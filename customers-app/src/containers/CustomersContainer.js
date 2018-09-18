@@ -14,7 +14,6 @@ class CustomersContainer extends Component {
         this.props.fetchCustomers(); //Aqui cargo los clientes de mi proyecto
     }
     
-
     handleAddNew = () => {
         this.props.history.push('/customers/new');
     }
@@ -23,7 +22,7 @@ class CustomersContainer extends Component {
         <div>
             <CustomersList 
                 customers={customers} 
-                urlPath={'customer/'}>
+                urlPath={'customers/'}>
             </CustomersList>
             <CustomersActions>
                 <button onClick={this.handleAddNew}>Nuevo Cliente</button>
