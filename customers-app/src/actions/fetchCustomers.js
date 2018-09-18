@@ -21,5 +21,6 @@ const customers = [
 
 //export const fetchCustomers = ({type: FETCH_CUSTOMERS, payload: null});
 //Ahora usando la funcion createAction de redux-action:
-export const fetchCustomers = createAction(FETCH_CUSTOMERS); //NO LE PASO PAYLOAD, xq se q tiene null y es por gusto
+export const fetchCustomers = createAction(FETCH_CUSTOMERS, () => customers); //NO LE PASO PAYLOAD, xq se q tiene null y es por gusto
+//el 2do parametro de la funcion action recibe una FUNCION PAYLOAD CREATOR, x eso rimero ponemos ().
 
