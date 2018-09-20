@@ -8,6 +8,12 @@ const isNumber = value => (
     isNaN(Number(value)) && "El campo debe ser un número"
 );
 
+const toNumber = value => value && Number(value);
+const toUpper = value => value && value.toUpperCase();
+const toLower = value => value && value.toLowerCase();
+const onlyGrow = (value, previousValue, values) => 
+    value && previousValue && (value > previousValue ? value : previousValue);
+
 const validate = values => {
     const error = {};
 
@@ -46,7 +52,10 @@ const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack }) => {
                     name='name' 
                     component={MyField}
                     type='text'
-                    label='Nombre: ' />
+                    label='Nombre: '
+                    parse={toUpper} //justo antes de guardar en el servidor
+                    format={toLower}  //justo antes de mostrar en el form al usuario
+                    />
                 <Field 
                     name='dni'
                     component={MyField}
@@ -57,7 +66,10 @@ const CustomerEdit = ({ name, dni, age, handleSubmit, submitting, onBack }) => {
                     component={MyField}
                     type='number'
                     validate={[isNumber]}
-                    label="Edad: " />
+                    label="Edad: "
+                    parse={toNumber} 
+                    normalize={onlyGrow} //se ejecuta luego de q se ejecute parse()
+                    />
                 <CustomersActions>
                     <button type='submit' disabled={submitting}>Aceptar</button>
                     <button onClick={onBack}>Cancelar</button>
