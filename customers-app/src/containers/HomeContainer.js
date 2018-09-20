@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import AppFrame from '../components/AppFrame';
-import CustomersActions from '../components/CustomersActions';
+import AppFrame from './../components/AppFrame';
+import CustomersActions from './../components/CustomersActions';
 
 class HomeContainer extends Component {
 
@@ -31,4 +31,4 @@ class HomeContainer extends Component {
 //withRouter es un decorator, agrega funcionalidad al componente, agregando las propiedades de props (history, etc..) 
 //q no le da la funcion al llamar al componente. Consejo, poner siempre withRouter para que siempre el componente cuente con 
 //las propiedades de history, etc en props
-export default withRouter(HomeContainer); 
+export default withRouter(HomeContainer);  //agrega las 3 propiedades: history, location y match

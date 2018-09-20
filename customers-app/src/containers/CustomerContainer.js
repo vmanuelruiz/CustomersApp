@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AppFrame from '../components/AppFrame';
-import { getCustomerByDni } from './../selectors/customers';
+import { getCustomerByDni } from '../selectors/customers';
 import { Route } from 'react-router-dom';
 import CustomerEdit from './../components/CustomerEdit';
 import CustomerData from './../components/CustomerData';
@@ -14,10 +14,12 @@ class CustomerContainer extends Component {
         <Route path="/customers/:dni/edit" children={
             ({ match }) => {
                 const CustomerControl = match ? CustomerEdit : CustomerData;
-                return <CustomerControl {...this.props.customer} />
+                return <CustomerControl { ...this.props.customer} />
+                //const CustomerControl = match ? CustomerEdit : CustomerData;
+                //return <CustomerControl {...this.props.customer} />
             }
         } />
-    )
+    );
 
     render() {
         return (

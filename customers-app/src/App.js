@@ -8,7 +8,7 @@ import CustomerContainer from './containers/CustomerContainer';
 
 class App extends Component {
 
-  renderHome = () => <h1>Home</h1>;
+  renderHome = () => <HomeContainer />;
   renderCustomerContainer = () => <h1>Customer Container</h1>;
   renderCustomerListContainer = () => <h1>Customers List Container</h1>;
   renderCustomerNewContainer = () => <h1>Customer New Container</h1>;
@@ -18,18 +18,19 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={HomeContainer} />
+          <Route exact path="/" component={this.renderHome} />
           <Route exact path="/customers" component={CustomersContainer} />
           <Switch>
             <Route exact path="/customers/new" component={this.renderCustomerNewContainer} />
-            <Route exact path="/customers/:dni" 
-              render={props => <CustomerContainer dni={props.match.params.dni} />} />
+            <Route path="/customers/:dni" 
+            render={props => <CustomerContainer dni={props.match.params.dni} />} />            
           </Switch>
         </div>
       </Router>
     );
   }
 }
+//
 //exact, por ej cuando la url no matchee exactamenete con lo q nosotros le pasamos en path, no se va a ejecutar el metodo de renderizado del metodo asociacdo
 // strict = true, evalua si existe una / final o no
 // match, para cuando se usa wildcard
