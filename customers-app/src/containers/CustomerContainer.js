@@ -7,11 +7,21 @@ import { getCustomerByDni } from '../selectors/customers';
 import { Route } from 'react-router-dom';
 import CustomerEdit from './../components/CustomerEdit';
 import CustomerData from './../components/CustomerData';
+import {fetchCustomers} from './../actions/fetchCustomers';
+import updateCustomer from './../actions/updateCustomer';
 
 class CustomerContainer extends Component {
 
+    componentDidMount() {
+        if(!this.props.customer){
+            this.props.fetchCustomers();
+        }
+    }
+    
     handleSubmit = values => {
         console.log(JSON.stringify(values));
+        const { id } = values;
+        this.props.updateCustomer(id, values);
     }
 
     handleOnBack = () => {
@@ -23,13 +33,16 @@ class CustomerContainer extends Component {
         //El sig route india que si la URL hace match con el path, match se pone en TRUE y se agrega el tag p dependiendo si es o no edicion
         <Route path="/customers/:dni/edit" children={
             ({ match }) => {
-                const CustomerControl = match ? CustomerEdit : CustomerData;
-                return <CustomerControl { ...this.props.customer} 
-                    onSubmit={this.handleSubmit}
-                    onBack={this.handleOnBack}
-                    />
-                //const CustomerControl = match ? CustomerEdit : CustomerData;
-                //return <CustomerControl {...this.props.customer} />
+                //if(this.props.customer){
+                    const CustomerControl = match ? CustomerEdit : CustomerData;
+                    return <CustomerControl { ...this.props.customer} 
+                        onSubmit={this.handleSubmit}
+                        onBack={this.handleOnBack}
+                        />
+                    //const CustomerControl = match ? CustomerEdit : CustomerData;
+                    //return <CustomerControl {...this.props.customer} />
+                //}
+                //return null;
             }
         } />
     );
@@ -49,6 +62,7 @@ class CustomerContainer extends Component {
 CustomerContainer.propTypes = {
     dni: PropTypes.string.isRequired,
     customer: PropTypes.object.isRequired,
+    fetchCustomers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -56,4 +70,6 @@ const mapStateToProps = (state, props) => ({
     //customer: state.customers.find( c => c.dni === props.dni)
 });
 
-export default withRouter(connect(mapStateToProps, null)(CustomerContainer));
+export default withRouter(connect(mapStateToProps, {
+    fetchCustomers, updateCustomer
+})(CustomerContainer));
