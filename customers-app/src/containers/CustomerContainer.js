@@ -17,11 +17,16 @@ class CustomerContainer extends Component {
             this.props.fetchCustomers();
         }
     }
+
+    handleOnSubmitSuccess = () => {
+        this.props.history.goBack();
+    }
     
     handleSubmit = values => {
         console.log(JSON.stringify(values));
         const { id } = values;
-        this.props.updateCustomer(id, values);
+        return this.props.updateCustomer(id, values); //hago return aqui xq esto recibe una promise y necesito devolverla para 
+        //que el boton aceptar se bloquee mientras la promise no se termine de realizar.
     }
 
     handleOnBack = () => {
@@ -37,6 +42,7 @@ class CustomerContainer extends Component {
                     const CustomerControl = match ? CustomerEdit : CustomerData;
                     return <CustomerControl { ...this.props.customer} 
                         onSubmit={this.handleSubmit}
+                        onSubmitSuccess={this.handleOnSubmitSuccess}
                         onBack={this.handleOnBack}
                         />
                     //const CustomerControl = match ? CustomerEdit : CustomerData;
