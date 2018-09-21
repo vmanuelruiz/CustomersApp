@@ -9,9 +9,11 @@ import {fetchCustomers} from './../actions/fetchCustomers';
 import { getCustomers } from './../selectors/customers';
 
 class CustomersContainer extends Component {
-
+ 
     componentDidMount() {
-        this.props.fetchCustomers(); //Aqui cargo los clientes de mi proyecto
+        if(this.props.customers.length === 0){
+            this.props.fetchCustomers(); //Aqui cargo los clientes de mi proyecto
+        }
     }
     
     handleAddNew = () => {
