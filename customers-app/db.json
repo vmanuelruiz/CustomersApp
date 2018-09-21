@@ -14,28 +14,17 @@
       "age": 36
     },
     {
-      "id": "30000000",
-      "dni": "30000000",
-      "name": "OTRO MAS",
-      "age": 35
-    },
-    {
       "id": "33000000",
       "dni": "33000000",
-      "name": "Luis Martines",
-      "age": 32
+      "name": "LUIS MARTINEZ",
+      "age": 32,
+      "isDeleteAllow": false
     },
     {
-      "name": "PEPE",
-      "dni": "12345",
-      "age": 123,
-      "id": "hjYIZcq"
-    },
-    {
-      "name": "PEPA",
-      "dni": "7890",
-      "age": 12,
-      "id": "6sV2XhD"
+      "name": "JAIME SALAME",
+      "dni": "1122",
+      "age": 23,
+      "id": "5~wQ88P"
     }
   ],
   "comments": [

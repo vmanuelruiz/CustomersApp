@@ -9,6 +9,7 @@ import CustomerEdit from './../components/CustomerEdit';
 import CustomerData from './../components/CustomerData';
 import {fetchCustomers} from './../actions/fetchCustomers';
 import {updateCustomer} from './../actions/updateCustomer';
+import {deleteCustomer} from './../actions/deleteCustomer';
 import { SubmissionError } from "redux-form";
 
 class CustomerContainer extends Component {
@@ -38,25 +39,39 @@ class CustomerContainer extends Component {
         this.props.history.goBack();
     }
 
+    handleDelete = id => {
+        console.log("HandleOnDelete");
+        this.props.deleteCustomer(id).then(v => {
+            this.props.history.goBack();
+        });
+        
+    }
+
+    renderCustomerControl = (isEdit, isDelete) => {
+        //if(this.props.customer){
+            const CustomerControl = isEdit ? CustomerEdit : CustomerData;
+            return <CustomerControl { ...this.props.customer} 
+                onSubmit={this.handleSubmit}
+                onSubmitSuccess={this.handleOnSubmitSuccess}
+                onBack={this.handleOnBack}
+                isDeleteAllow={!!isDelete}
+                onDelete={this.handleDelete}
+                />
+        //}
+        //return null;
+    }
+
     //<p>Datos del cliente: {this.props.customer.name}</p>
     renderBody = () => (
         //El sig route india que si la URL hace match con el path, match se pone en TRUE y se agrega el tag p dependiendo si es o no edicion
         <Route path="/customers/:dni/edit" children={
-            ({ match }) => {
-                //if(this.props.customer){
-                    const CustomerControl = match ? CustomerEdit : CustomerData;
-                    return <CustomerControl { ...this.props.customer} 
-                        onSubmit={this.handleSubmit}
-                        onSubmitSuccess={this.handleOnSubmitSuccess}
-                        onBack={this.handleOnBack}
-                        />
-                    //const CustomerControl = match ? CustomerEdit : CustomerData;
-                    //return <CustomerControl {...this.props.customer} />
-                //}
-                //return null;
-            }
+            ({ match: isEdit }) => (
+            <Route path="/customers/:dni/del" children={
+                ({ match: isDelete }) => (
+                    this.renderCustomerControl(isEdit, isDelete))
+            }/> )
         } />
-    );
+    )
 
     render() {
         return (
@@ -75,6 +90,7 @@ CustomerContainer.propTypes = {
     customer: PropTypes.object,
     fetchCustomers: PropTypes.func.isRequired,
     updateCustomer: PropTypes.func.isRequired,
+    deleteCustomer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -83,5 +99,5 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(connect(mapStateToProps, {
-    fetchCustomers, updateCustomer
+    fetchCustomers, updateCustomer, deleteCustomer
 })(CustomerContainer));
